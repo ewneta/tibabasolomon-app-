@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="am">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b32">
+  <meta name="description" content="ጥበበ ሰለሞን — ስለ ባህላዊ ዕፅዋት እና ታሪካዊ እውቀት የትምህርት መድረክ">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>ጥበበ ሰለሞን | Tibabasolomon</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="mark">ጥ</span><span>ጥበበ ሰለሞን<small>Tibabasolomon</small></span></a>
+  <button id="langBtn" class="lang" type="button">English</button>
+</header>
+<main><section class="auth-section">
+  <h2>የአባል መግቢያ / Member Access</h2>
+
+  <form id="registerForm">
+    <h3>አዲስ አባል መመዝገቢያ</h3>
+    <input id="regEmail" type="email" placeholder="Email" required>
+    <input id="regPassword" type="password" placeholder="Password (ቢያንስ 6 ቁምፊ)" minlength="6" required>
+    <button type="submit">Register</button>
+  </form>
+
+  <form id="loginForm">
+    <h3>የአባል መግቢያ</h3>
+    <input id="loginEmail" type="email" placeholder="Email" required>
+    <input id="loginPassword" type="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <button id="logoutBtn" type="button" hidden>Logout</button>
+  <p id="authMessage" role="status"></p>
+</section>
+  <section class="hero">
+    <p class="eyebrow" data-am="ባህላዊ እውቀት • ትምህርት • ባህል" data-en="TRADITIONAL KNOWLEDGE • EDUCATION • CULTURE">ባህላዊ እውቀት • ትምህርት • ባህል</p>
+    <h1 data-am="የዕፅዋት እውቀትን በጥንቃቄ እንማር" data-en="Explore traditional plant knowledge thoughtfully">የዕፅዋት እውቀትን በጥንቃቄ እንማር</h1>
+    <p class="intro" data-am="ስለ ባህላዊ ዕፅዋት፣ ታሪካቸው፣ አጠቃቀማቸው በባህል ውስጥ እና የደህንነት ጉዳዮች የሚያስተምር መድረክ።" data-en="An educational space for learning about traditional plants, their history, cultural uses, and safety considerations.">ስለ ባህላዊ ዕፅዋት፣ ታሪካቸው፣ አጠቃቀማቸው በባህል ውስጥ እና የደህንነት ጉዳዮች የሚያስተምር መድረክ።</p>
+    <a class="primary" href="#learn" data-am="ትምህርቶችን ይመልከቱ" data-en="Explore lessons">ትምህርቶችን ይመልከቱ</a>
+  </section>
+
+  <section id="learn" class="section">
+    <div class="section-heading">
+      <div><p class="eyebrow" data-am="የመማሪያ ክፍል" data-en="LEARNING LIBRARY">የመማሪያ ክፍል</p>
+      <h2 data-am="ትምህርቶች" data-en="Lessons">ትምህርቶች</h2></div>
+      <span class="tag" data-am="ነፃ መግቢያ" data-en="Free preview">ነፃ መግቢያ</span>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="emoji">🌿</div><h3 data-am="የዕፅዋት መግቢያ" data-en="Introduction to plants">የዕፅዋት መግቢያ</h3><p data-am="የተለያዩ ዕፅዋትን ስም፣ መለያያቸውን እና ታሪካዊ አጠቃቀማቸውን መማር።" data-en="Learn plant names, identification, and historical cultural uses.">የተለያዩ ዕፅዋትን ስም፣ መለያያቸውን እና ታሪካዊ አጠቃቀማቸውን መማር።</p><span class="free" data-am="ነፃ" data-en="FREE">ነፃ</span></article>
+      <article class="card"><div class="emoji">📚</div><h3 data-am="የባህል ታሪክ" data-en="Cultural history">የባህል ታሪክ</h3><p data-am="ባህላዊ እውቀት ከትውልድ ወደ ትውልድ እንዴት እንደተላለፈ መመርመር።" data-en="Explore how traditional knowledge has been passed between generations.">ባህላዊ እውቀት ከትውልድ ወደ ትውልድ እንዴት እንደተላለፈ መመርመር።</p><span class="free" data-am="ነፃ" data-en="FREE">ነፃ</span></article>
+      <article class="card premium-card"><div class="emoji">🎓</div><h3 data-am="ጥልቅ ትምህርቶች" data-en="Advanced lessons">ጥልቅ ትምህርቶች</h3><p data-am="ለአባላት ብቻ የሚቀርቡ ተጨማሪ ትምህርቶችና ቪዲዮዎች።" data-en="Additional lessons and videos for members.">ለአባላት ብቻ የሚቀርቡ ተጨማሪ ትምህርቶችና ቪዲዮዎች።</p><span class="premium" data-am="Premium" data-en="Premium">Premium</span></article>
+    </div>
+  </section>
+
+  <section class="membership">
+    <div><p class="eyebrow" data-am="የአባልነት እቅድ" data-en="MEMBERSHIP">የአባልነት እቅድ</p>
+    <h2 data-am="Premium አባልነት" data-en="Premium membership">Premium አባልነት</h2>
+    <p data-am="የተጨማሪ ትምህርቶችና ቪዲዮዎች መዳረሻ።" data-en="Access to additional lessons and videos.">የተጨማሪ ትምህርቶችና ቪዲዮዎች መዳረሻ።</p></div>
+    <div class="price"><strong>500 ብር</strong><span data-am="/ በወር" data-en="/ month">/ በወር</span><small data-am="ክፍያ፦ CBE (በእጅ ማረጋገጫ ይፈልጋል)" data-en="Payment: CBE (manual verification required)">ክፍያ፦ CBE (በእጅ ማረጋገጫ ይፈልጋል)</small></div>
+  </section>
+
+  <section class="notice"><strong data-am="አስፈላጊ የደህንነት ማስታወሻ" data-en="Important safety note">አስፈላጊ የደህንነት ማስታወሻ</strong><p data-am="ይህ መድረክ ለትምህርትና ለባህላዊ እውቀት ብቻ ነው። ዕፅዋት ጎጂ ሊሆኑ፣ ከመድኃኒት ጋር ሊጋጩ ወይም የጤና ችግር ሊያስከትሉ ይችላሉ። ለሕክምና አጠቃቀም ከባለሙያ የጤና አገልግሎት ሰጪ ጋር ይปรึกษሩ።" data-en="This platform is for education and cultural knowledge only. Plants can be harmful or interact with medicines. Do not use them to treat a condition without advice from a qualified healthcare professional.">ይህ መድረክ ለትምህርትና ለባህላዊ እውቀት ብቻ ነው። ዕፅዋት ጎጂ ሊሆኑ፣ ከመድኃኒት ጋር ሊጋጩ ወይም የጤና ችግር ሊያስከትሉ ይችላሉ። ለሕክምና አጠቃቀም ከባለሙያ የጤና አገልግሎት ሰጪ ጋር ይปรึกษሩ።</p></section>
+</main>
+<footer><a href="https://t.me/tibabasolomonawi" target="_blank" rel="noopener">Telegram Channel ↗</a><span>© Tibabasolomon</span></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
