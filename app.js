@@ -104,8 +104,8 @@ if (langBtn) {
     });
 
     langBtn.textContent = lang === "am" ? "English" : "አማርኛ";
+});
 }
-
 
 // PWA Service Worker
 if ("serviceWorker" in navigator) {
