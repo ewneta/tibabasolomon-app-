@@ -69,7 +69,7 @@ if (loginForm) {
       showMessage("በተሳካ ሁኔታ ገብተዋል።");
       loginForm.reset();
     } catch (error) {
-      showMessage("መግባት አልተሳካም። መረጃዎን ያረጋግጡ።");
+      showMessage("Login error: " + error.code);
       console.error(error);
     }
   });
