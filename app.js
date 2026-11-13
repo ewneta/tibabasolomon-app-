@@ -15,7 +15,7 @@ import {
   updateDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
-
+alert("updateDoc status: " + typeof updateDoc);
 const firebaseConfig = {
   apiKey: "AIzaSyAtXcwv1HMzzqtrB9q0K4tD-jkruHBTOsU",
   authDomain: "tibabasolomon-3295a.firebaseapp.com",
