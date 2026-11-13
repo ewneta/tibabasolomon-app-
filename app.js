@@ -192,6 +192,11 @@ async function loadLessons() {
 
      const deleteBtn = document.createElement("button");
 deleteBtn.textContent = "Delete";
+deleteBtn.type = "button";
+deleteBtn.style.display = "block";
+deleteBtn.style.visibility = "visible";
+deleteBtn.style.marginTop = "12px";
+deleteBtn.style.padding = "10px 20px";
 deleteBtn.onclick = async () => {
   if (confirm("ይህን ትምህርት መሰረዝ ይፈልጋሉ?")) {
     try {
