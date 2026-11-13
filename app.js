@@ -5,7 +5,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAtXcwv1HMzzqtrB9q0K4tD-jkruHBTOsU",
