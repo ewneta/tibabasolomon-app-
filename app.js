@@ -102,7 +102,7 @@ onAuthStateChanged(auth, (user) => {
   }
 
   if (user) {
-    showMessage("በመለያዎ ገብተዋል።");
+   loadLessons(); showMessage("በመለያዎ ገብተዋል።");
   }
 });
 
