@@ -238,7 +238,7 @@ editBtn.onclick = async () => {
     loadLessons();
   } catch (error) {
     console.error(error);
-    alert("ማስተካከል አልተሳካም።");
+    alert(error.code + " - " + error.message);
   }
 };
 
