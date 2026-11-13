@@ -25,7 +25,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = getAuth(app);const db = getFirestore(app);
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
