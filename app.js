@@ -95,7 +95,7 @@ onAuthStateChanged(auth, (user) => {
   const adminPanel = document.getElementById("adminPanel");
 
   const isAdminUser = user &&
-    user.uid === "vMQkrT7FxkNvCFxwr5ZDFhlxN052";
+    user.uid === "YplGuZ4wQxO1otM0wuJjf8gBy9a2";
 
   if (adminPanel) {
     adminPanel.hidden = !isAdminUser;
