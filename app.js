@@ -156,3 +156,47 @@ if (lessonForm) {
     }
   });
 }
+// Display lessons from Firestore
+async function loadLessons() {
+  const lessonList = document.getElementById("lessonList");
+
+  if (!lessonList) return;
+
+  lessonList.innerHTML = "<p>ትምህርቶችን በመጫን ላይ...</p>";
+
+  try {
+    const snapshot = await getDocs(
+      collection(db, "lessons")
+    );
+
+    lessonList.innerHTML = "";
+
+    snapshot.forEach((lessonDoc) => {
+      const lesson = lessonDoc.data();
+
+      const card = document.createElement("article");
+      card.className = "lesson-card";
+
+      const title = document.createElement("h3");
+      title.textContent = lang === "am"
+        ? lesson.titleAm
+        : lesson.titleEn;
+
+      const description = document.createElement("p");
+      description.textContent = lang === "am"
+        ? lesson.descriptionAm
+        : lesson.descriptionEn;
+
+      card.appendChild(title);
+      card.appendChild(description);
+
+      lessonList.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error(error);
+    lessonList.textContent = "ትምህርቶችን ማምጣት አልተቻለም።";
+  }
+}
+
+loadLessons();
