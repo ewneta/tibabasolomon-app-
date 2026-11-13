@@ -1,4 +1,4 @@
-import { initializeApp } } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
   getAuth,
@@ -6,7 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";import {
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
   addDoc,
@@ -15,6 +17,7 @@ import {
   updateDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
 console.log("Firestore updateDoc:", updateDoc);
 const firebaseConfig = {
   apiKey: "AIzaSyAtXcwv1HMzzqtrB9q0K4tD-jkruHBTOsU",
