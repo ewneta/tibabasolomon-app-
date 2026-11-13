@@ -129,3 +129,30 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(console.error);
   });
 }
+// Admin: Add lessons to Firestore
+const lessonForm = document.getElementById("lessonForm");
+const adminMessage = document.getElementById("adminMessage");
+const adminLessons = document.getElementById("adminLessons");
+
+if (lessonForm) {
+  lessonForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    try {
+      await addDoc(collection(db, "lessons"), {
+        titleAm: document.getElementById("lessonTitleAm").value.trim(),
+        titleEn: document.getElementById("lessonTitleEn").value.trim(),
+        descriptionAm: document.getElementById("lessonDescriptionAm").value.trim(),
+        descriptionEn: document.getElementById("lessonDescriptionEn").value.trim(),
+        isPremium: document.getElementById("lessonPremium").checked
+      });
+
+      adminMessage.textContent = "ትምህርቱ በተሳካ ሁኔታ ተጨምሯል!";
+      lessonForm.reset();
+
+    } catch (error) {
+      console.error(error);
+      adminMessage.textContent = "ስህተት ተፈጥሯል። ፈቃድን እና ግንኙነቱን ያረጋግጡ።";
+    }
+  });
+}
