@@ -92,6 +92,15 @@ onAuthStateChanged(auth, (user) => {
   if (registerForm) registerForm.hidden = !!user;
   if (loginForm) loginForm.hidden = !!user;
 
+  const adminPanel = document.getElementById("adminPanel");
+
+  const isAdminUser = user &&
+    user.uid === "vMQkrT7FxkNvCFxwr5ZDFhlxN052";
+
+  if (adminPanel) {
+    adminPanel.hidden = !isAdminUser;
+  }
+
   if (user) {
     showMessage("በመለያዎ ገብተዋል።");
   }
