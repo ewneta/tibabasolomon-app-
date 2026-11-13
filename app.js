@@ -190,6 +190,20 @@ async function loadLessons() {
       card.appendChild(title);
       card.appendChild(description);
 
+     const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+deleteBtn.onclick = async () => {
+  if (confirm("ይህን ትምህርት መሰረዝ ይፈልጋሉ?")) {
+    try {
+      await deleteDoc(doc(db, "lessons", lessonDoc.id));
+      loadLessons();
+    } catch (error) {
+      console.error(error);
+      alert("መሰረዝ አልተሳካም።");
+    }
+  }
+};
+card.appendChild(deleteBtn);
       lessonList.appendChild(card);
     });
 
