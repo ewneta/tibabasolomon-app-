@@ -209,6 +209,40 @@ deleteBtn.onclick = async () => {
   }
 };
 card.appendChild(deleteBtn);
+      const editBtn = document.createElement("button");
+editBtn.textContent = "Edit";
+editBtn.type = "button";
+
+editBtn.onclick = async () => {
+  const newTitleAm = prompt("አዲሱን የአማርኛ ርዕስ አስገባ:", lesson.titleAm);
+  if (newTitleAm === null) return;
+
+  const newTitleEn = prompt("Enter the new English title:", lesson.titleEn);
+  if (newTitleEn === null) return;
+
+  const newDescriptionAm = prompt("አዲሱን የአማርኛ መግለጫ አስገባ:", lesson.descriptionAm);
+  if (newDescriptionAm === null) return;
+
+  const newDescriptionEn = prompt("Enter the new English description:", lesson.descriptionEn);
+  if (newDescriptionEn === null) return;
+
+  try {
+    await updateDoc(doc(db, "lessons", lessonDoc.id), {
+      titleAm: newTitleAm,
+      titleEn: newTitleEn,
+      descriptionAm: newDescriptionAm,
+      descriptionEn: newDescriptionEn
+    });
+
+    alert("ትምህርቱ ተስተካክሏል!");
+    loadLessons();
+  } catch (error) {
+    console.error(error);
+    alert("ማስተካከል አልተሳካም።");
+  }
+};
+
+card.appendChild(editBtn);
       lessonList.appendChild(card);
     });
 
