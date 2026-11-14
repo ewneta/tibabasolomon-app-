@@ -34,6 +34,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);const db = getFirestore(app);
 
+async function checkPremiumAccess(user) {
+  if (!user) return false;
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) return false;
+
+    const userData = userSnap.data();
+
+    return userData.premiumUntil &&
+      userData.premiumUntil.toDate() > new Date();
+
+  } catch (error) {
+    console.error("Premium check error:", error);
+    return false;
+  }
+}
+
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const logoutBtn = document.getElementById("logoutBtn");
@@ -172,9 +192,21 @@ async function loadLessons() {
   lessonList.innerHTML = "<p>ትምህርቶችን በመጫን ላይ...</p>";
 
   try {
-    const snapshot = await getDocs(
-      collection(db, "lessons")
-    );
+    const user = auth.currentUser;
+
+const isAdmin = user &&
+  user.uid === "YplGuZ4wQxO1otM0wuJjf8gBy9a2";
+
+const hasPremium = isAdmin ||
+  await checkPremiumAccess(user);
+
+const lessonsRef = collection(db, "lessons");
+
+const lessonsQuery = hasPremium
+  ? lessonsRef
+  : query(lessonsRef, where("isPremium", "==", false));
+
+const snapshot = await getDocs(lessonsQuery);
 
     lessonList.innerHTML = "";
 
