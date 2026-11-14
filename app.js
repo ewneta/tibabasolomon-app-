@@ -13,11 +13,13 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   deleteDoc,
   updateDoc,
-  doc
+  doc,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
-
 console.log("Firestore updateDoc:", updateDoc);
 const firebaseConfig = {
   apiKey: "AIzaSyAtXcwv1HMzzqtrB9q0K4tD-jkruHBTOsU",
