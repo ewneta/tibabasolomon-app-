@@ -185,6 +185,60 @@ if (lessonForm) {
     }
   });
 }
+const activatePremiumBtn = document.getElementById("activatePremiumBtn");
+
+if (activatePremiumBtn) {
+  activatePremiumBtn.addEventListener("click", async () => {
+    const uid = document.getElementById("premiumUserUid").value.trim();
+    const message = document.getElementById("premiumAdminMessage");
+
+    if (!uid) {
+      message.textContent = "Firebase UID ያስገቡ።";
+      return;
+    }
+
+    if (!auth.currentUser) {
+      message.textContent = "እባክዎ በAdmin መለያ ይግቡ።";
+      return;
+    }
+
+    try {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      let startDate = new Date();
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+
+        if (
+          userData.premiumUntil &&
+          userData.premiumUntil.toDate() > startDate
+        ) {
+          startDate = userData.premiumUntil.toDate();
+        }
+      }
+
+      const expiryDate = new Date(
+        startDate.getTime() + 30 * 24 * 60 * 60 * 1000
+      );
+
+      await setDoc(
+        userRef,
+        {
+          premiumUntil: Timestamp.fromDate(expiryDate)
+        },
+        { merge: true }
+      );
+
+      message.textContent = "Premium ለ30 ቀናት ተነቅቷል!";
+
+    } catch (error) {
+      console.error(error);
+      message.textContent = "ማንቃት አልተሳካም። የAdmin ፈቃድን ያረጋግጡ።";
+    }
+  });
+}
 // Display lessons from Firestore
 async function loadLessons() {
   const lessonList = document.getElementById("lessonList");
