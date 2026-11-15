@@ -117,8 +117,12 @@ if (logoutBtn) {
     }
   });
 }
-
+let unsubscribePremiumStatus = null;
 onAuthStateChanged(auth, async (user) => {
+  if (unsubscribePremiumStatus) {
+  unsubscribePremiumStatus();
+  unsubscribePremiumStatus = null;
+}
   if (logoutBtn) logoutBtn.hidden = !user;
   if (registerForm) registerForm.hidden = !!user;
   if (loginForm) loginForm.hidden = !!user;
