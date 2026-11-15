@@ -20,7 +20,8 @@ import {
   query,
   where,
   setDoc,
-  Timestamp
+  Timestamp,
+  writeBatch
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 console.log("Firestore updateDoc:", updateDoc);
 const firebaseConfig = {
@@ -305,21 +306,90 @@ if (loadPaymentRequestsBtn) {
         return;
       }
 
-      snapshot.forEach((requestDoc) => {
-        const data = requestDoc.data();
+      
+snapshot.forEach((requestDoc) => {
+  const data = requestDoc.data();
 
-        const card = document.createElement("div");
-        card.className = "payment-request-card";
+  const card = document.createElement("div");
+  card.className = "payment-request-card";
 
-        const details = document.createElement("p");
-        details.textContent =
-          `ስም: ${data.payerName} | Email: ${data.email} | ` +
-          `መጠን: ${data.amount} ብር | ` +
-          `የግብይት ቁጥር: ${data.transactionRef}`;
+  const details = document.createElement("p");
+  details.textContent =
+    `ስም: ${data.payerName} | Email: ${data.email} | ` +
+    `መጠን: ${data.amount} ብር | ` +
+    `የግብይት ቁጥር: ${data.transactionRef}`;
 
-        card.appendChild(details);
-        list.appendChild(card);
-      });
+  const approveBtn = document.createElement("button");
+  approveBtn.textContent = "Approve Premium (30 Days)";
+
+  approveBtn.addEventListener("click", async () => {
+    if (data.amount !== 500 || !data.uid) {
+      alert("የክፍያ መረጃው ትክክል አይደለም።");
+      return;
+    }
+
+    if (!confirm("የCBE ክፍያውን በእውነት አረጋግጠዋል?")) {
+      return;
+    }
+
+    approveBtn.disabled = true;
+
+    try {
+      const userRef = doc(db, "users", data.uid);
+      const userSnap = await getDoc(userRef);
+
+      let startDate = new Date();
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+
+        if (
+          userData.premiumUntil &&
+          userData.premiumUntil.toDate() > startDate
+        ) {
+          startDate = userData.premiumUntil.toDate();
+        }
+      }
+
+      const expiryDate = new Date(
+        startDate.getTime() + 30 * 24 * 60 * 60 * 1000
+      );
+
+      const batch = writeBatch(db);
+
+      batch.set(
+        userRef,
+        {
+          premiumUntil: Timestamp.fromDate(expiryDate)
+        },
+        { merge: true }
+      );
+
+      batch.update(
+        requestDoc.ref,
+        {
+          status: "approved",
+          approvedAt: Timestamp.now()
+        }
+      );
+
+      await batch.commit();
+
+      card.textContent =
+        "Premium በ30 ቀናት ተነቅቷል።";
+
+    } catch (error) {
+      console.error(error);
+      alert("ማጽደቅ አልተሳካም። የAdmin ፈቃድን ያረጋግጡ።");
+      approveBtn.disabled = false;
+    }
+  });
+
+  card.appendChild(details);
+  card.appendChild(approveBtn);
+  list.appendChild(card);
+});
+
 
     } catch (error) {
       console.error(error);
