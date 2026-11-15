@@ -297,7 +297,20 @@ if (premiumPaymentForm) {
       return;
     }
 
-    try {
+    try {   
+      const pendingQuery = query(
+        collection(db, "paymentRequests"),
+        where("uid", "==", user.uid),
+        where("status", "==", "pending")
+      );
+
+      const pendingSnapshot = await getDocs(pendingQuery);
+
+      if (!pendingSnapshot.empty) {
+        message.textContent =
+          "የቀድሞው የክፍያ ጥያቄዎ ገና አልተፈታም። እባክዎ ውሳኔውን ይጠብቁ።";
+        return;
+      }
       await addDoc(collection(db, "paymentRequests"), {
         uid: user.uid,
         email: user.email,
