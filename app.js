@@ -21,7 +21,8 @@ import {
   where,
   setDoc,
   Timestamp,
-  writeBatch
+  writeBatch,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 console.log("Firestore updateDoc:", updateDoc);
 const firebaseConfig = {
