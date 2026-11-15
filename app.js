@@ -389,7 +389,10 @@ snapshot.forEach((requestDoc) => {
   card.appendChild(approveBtn);
   list.appendChild(card);
 });
-
+  card.appendChild(details);
+  card.appendChild(approveBtn);
+  list.appendChild(card);
+});
 
     } catch (error) {
       console.error(error);
