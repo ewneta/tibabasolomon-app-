@@ -276,6 +276,59 @@ if (premiumPaymentForm) {
   });
 }
 
+const loadPaymentRequestsBtn =
+  document.getElementById("loadPaymentRequestsBtn");
+
+if (loadPaymentRequestsBtn) {
+  loadPaymentRequestsBtn.addEventListener("click", async () => {
+    const list = document.getElementById("paymentRequestsList");
+
+    if (!auth.currentUser) {
+      list.textContent = "እባክዎ Admin መለያ ይጠቀሙ።";
+      return;
+    }
+
+    list.textContent = "እየጫነ ነው...";
+
+    try {
+      const requestsQuery = query(
+        collection(db, "paymentRequests"),
+        where("status", "==", "pending")
+      );
+
+      const snapshot = await getDocs(requestsQuery);
+
+      list.innerHTML = "";
+
+      if (snapshot.empty) {
+        list.textContent = "አዲስ የክፍያ ጥያቄ የለም።";
+        return;
+      }
+
+      snapshot.forEach((requestDoc) => {
+        const data = requestDoc.data();
+
+        const card = document.createElement("div");
+        card.className = "payment-request-card";
+
+        const details = document.createElement("p");
+        details.textContent =
+          `ስም: ${data.payerName} | Email: ${data.email} | ` +
+          `መጠን: ${data.amount} ብር | ` +
+          `የግብይት ቁጥር: ${data.transactionRef}`;
+
+        card.appendChild(details);
+        list.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error(error);
+      list.textContent =
+        "ጥያቄዎቹን ማምጣት አልተቻለም።";
+    }
+  });
+}
+
 if (activatePremiumBtn) {
   activatePremiumBtn.addEventListener("click", async () => {
     const uid = document.getElementById("premiumUserUid").value.trim();
