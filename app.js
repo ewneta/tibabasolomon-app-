@@ -305,9 +305,7 @@ if (premiumPaymentForm) {
       );
 
       const pendingSnapshot = await getDocs(pendingQuery);
-message.textContent =
-  "የተገኙ የቀድሞ ጥያቄዎች፦ " + pendingSnapshot.size;
-return;
+
       if (!pendingSnapshot.empty) {
         message.textContent =
           "የቀድሞው የክፍያ ጥያቄዎ ገና አልተፈታም። እባክዎ ውሳኔውን ይጠብቁ።";
