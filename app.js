@@ -323,10 +323,17 @@ snapshot.forEach((requestDoc) => {
   approveBtn.textContent = "Approve Premium (30 Days)";
 
   approveBtn.addEventListener("click", async () => {
-    if (data.amount !== 500 || !data.uid) {
-      alert("የክፍያ መረጃው ትክክል አይደለም።");
-      return;
-    }
+    if ( 
+      data.amount !== 500 ||
+  !data.uid ||
+  typeof data.payerName !== "string" ||
+  !data.payerName.trim() ||
+  typeof data.transactionRef !== "string" ||
+  !data.transactionRef.trim()
+) {
+  alert("የክፍያ መረጃው ሙሉ ወይም ትክክል አይደለም።");
+  return;
+}
 
     if (!confirm("የCBE ክፍያውን በእውነት አረጋግጠዋል?")) {
       return;
