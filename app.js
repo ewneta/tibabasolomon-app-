@@ -231,7 +231,7 @@ if (lessonForm) {
 const activatePremiumBtn = document.getElementById("activatePremiumBtn");
 
 const premiumPaymentForm = document.getElementById("premiumPaymentForm");
-
+console.log("Premium payment form:", premiumPaymentForm);
 if (premiumPaymentForm) {
   premiumPaymentForm.addEventListener("submit", async (event) => {
     event.preventDefault();
