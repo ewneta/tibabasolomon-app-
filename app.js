@@ -116,12 +116,14 @@ if (logoutBtn) {
   });
 }
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (logoutBtn) logoutBtn.hidden = !user;
   if (registerForm) registerForm.hidden = !!user;
   if (loginForm) loginForm.hidden = !!user;
 
   const adminPanel = document.getElementById("adminPanel");
+  const premiumStatus = document.getElementById("premiumStatus");
+  const premiumStatusMessage = document.getElementById("premiumStatusMessage");
 
   const isAdminUser = user &&
     user.uid === "YplGuZ4wQxO1otM0wuJjf8gBy9a2";
@@ -130,8 +132,49 @@ onAuthStateChanged(auth, (user) => {
     adminPanel.hidden = !isAdminUser;
   }
 
+  if (premiumStatus) {
+    premiumStatus.hidden = !user;
+  }
+
   if (user) {
-   loadLessons(); showMessage("በመለያዎ ገብተዋል።");
+    loadLessons();
+    showMessage("በመለያዎ ገብተዋል።");
+
+    if (isAdminUser) {
+      premiumStatusMessage.textContent =
+        "አስተዳዳሪ ነዎት። ሁሉንም ትምህርቶች ማየት ይችላሉ።";
+    } else {
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const expiry = userData.premiumUntil
+            ? userData.premiumUntil.toDate()
+            : null;
+
+          if (expiry && expiry > new Date()) {
+            const dateText = expiry.toLocaleDateString(
+              lang === "am" ? "am-ET" : "en-US"
+            );
+
+            premiumStatusMessage.textContent =
+              "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
+          } else {
+            premiumStatusMessage.textContent =
+              "አሁን Premium አባል አይደሉም።";
+          }
+        } else {
+          premiumStatusMessage.textContent =
+            "አሁን Premium አባል አይደሉም።";
+        }
+      } catch (error) {
+        console.error(error);
+        premiumStatusMessage.textContent =
+          "የአባልነት ሁኔታን ማምጣት አልተቻለም።";
+      }
+    }
   }
 });
 
