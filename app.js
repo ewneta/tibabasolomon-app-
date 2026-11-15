@@ -230,6 +230,52 @@ if (lessonForm) {
 }
 const activatePremiumBtn = document.getElementById("activatePremiumBtn");
 
+const premiumPaymentForm = document.getElementById("premiumPaymentForm");
+
+if (premiumPaymentForm) {
+  premiumPaymentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const user = auth.currentUser;
+    const message = document.getElementById("paymentRequestMessage");
+
+    if (!user) {
+      message.textContent = "እባክዎ መጀመሪያ Login ያድርጉ።";
+      return;
+    }
+
+    const payerName = document.getElementById("payerName").value.trim();
+    const transactionRef = document.getElementById("transactionRef").value.trim();
+
+    if (!payerName || !transactionRef) {
+      message.textContent = "ሁሉንም ቦታ ይሙሉ።";
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "paymentRequests"), {
+        uid: user.uid,
+        email: user.email,
+        payerName: payerName,
+        transactionRef: transactionRef,
+        amount: 500,
+        status: "pending",
+        createdAt: Timestamp.now()
+      });
+
+      message.textContent =
+        "የክፍያ ጥያቄዎ ተልኳል። ማረጋገጫ ይጠብቁ።";
+
+      premiumPaymentForm.reset();
+
+    } catch (error) {
+      console.error(error);
+      message.textContent =
+        "ጥያቄውን መላክ አልተሳካም። እንደገና ይሞክሩ።";
+    }
+  });
+}
+
 if (activatePremiumBtn) {
   activatePremiumBtn.addEventListener("click", async () => {
     const uid = document.getElementById("premiumUserUid").value.trim();
