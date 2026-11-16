@@ -139,7 +139,8 @@ onAuthStateChanged(auth, async (user) => {
   if (adminPanel) {
     adminPanel.hidden = !isAdminUser;
   }
-
+console.log("Current UID:", user?.uid);
+console.log("Is Admin:", isAdminUser);
   if (premiumStatus) {
     premiumStatus.hidden = !user;
   }
