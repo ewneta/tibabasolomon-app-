@@ -392,7 +392,9 @@ snapshot.forEach((requestDoc) => {
     `ስም: ${data.payerName} | Email: ${data.email} | ` +
     `መጠን: ${data.amount} ብር | ` +
     `የግብይት ቁጥር: ${data.transactionRef}`;
-
+if (data.status !== "pending") {
+  return;
+}
   const approveBtn = document.createElement("button");
   approveBtn.textContent = "Approve Premium (30 Days)";
 
