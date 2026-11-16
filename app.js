@@ -171,7 +171,9 @@ onAuthStateChanged(auth, async (user) => {
           b.createdAt.toMillis() - a.createdAt.toMillis()
         );
 
-        const latestRequest = requests[0];
+        const latestRequest = requests.find(
+  (request) => request.status === "approved"
+) || requests[0];
 
         if (latestRequest.status === "pending") {
           statusElement.textContent =
