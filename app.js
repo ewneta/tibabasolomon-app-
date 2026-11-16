@@ -470,7 +470,7 @@ snapshot.forEach((requestDoc) => {
   card.appendChild(approveBtn);
   const rejectBtn = document.createElement("button");
 rejectBtn.textContent = "Reject Request";
-
+console.log("REJECT BUTTON CREATED");
 rejectBtn.addEventListener("click", async () => {
   if (!confirm("ይህን የክፍያ ጥያቄ ውድቅ ማድረግ ይፈልጋሉ?")) {
     return;
