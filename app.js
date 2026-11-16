@@ -468,7 +468,33 @@ snapshot.forEach((requestDoc) => {
 
   card.appendChild(details);
   card.appendChild(approveBtn);
-  list.appendChild(card);
+  const rejectBtn = document.createElement("button");
+rejectBtn.textContent = "Reject Request";
+
+rejectBtn.addEventListener("click", async () => {
+  if (!confirm("ይህን የክፍያ ጥያቄ ውድቅ ማድረግ ይፈልጋሉ?")) {
+    return;
+  }
+
+  rejectBtn.disabled = true;
+
+  try {
+    await updateDoc(requestDoc.ref, {
+      status: "rejected",
+      rejectedAt: Timestamp.now()
+    });
+
+    card.textContent = "የክፍያ ጥያቄው ውድቅ ተደርጓል።";
+
+  } catch (error) {
+    console.error(error);
+    alert("ጥያቄውን ውድቅ ማድረግ አልተሳካም።");
+    rejectBtn.disabled = false;
+  }
+});
+
+card.appendChild(rejectBtn);
+list.appendChild(card);
 });
   
 
