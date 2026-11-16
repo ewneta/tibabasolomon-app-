@@ -577,8 +577,7 @@ const snapshot = await getDocs(lessonsQuery);
 
       card.appendChild(title);
       card.appendChild(description);
-if (isAdmin) 
-{
+if (isAdmin) {
      const deleteBtn = document.createElement("button");
 deleteBtn.textContent = "Delete";
 deleteBtn.type = "button";
