@@ -641,4 +641,3 @@ card.appendChild(editBtn);
   }
 }
 
-loadLessons();
