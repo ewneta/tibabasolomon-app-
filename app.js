@@ -118,6 +118,7 @@ if (logoutBtn) {
   });
 }
 let unsubscribePremiumStatus = null;
+let unsubscribePaymentStatus = null;
 onAuthStateChanged(auth, async (user) => {
   if (unsubscribePremiumStatus) {
   unsubscribePremiumStatus();
@@ -145,49 +146,52 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     loadLessons(); 
     if (!isAdminUser) {
-      const statusElement = document.getElementById(
-        "myPaymentRequestStatus"
-      );
+  const statusElement = document.getElementById(
+    "myPaymentRequestStatus"
+  );
 
-      if (statusElement) {
-        try {
-          const myRequestsQuery = query(
-            collection(db, "paymentRequests"),
-            where("uid", "==", user.uid)
-          );
+  if (statusElement) {
+    const myRequestsQuery = query(
+      collection(db, "paymentRequests"),
+      where("uid", "==", user.uid)
+    );
 
-          const snapshot = await getDocs(myRequestsQuery);
-
-          if (snapshot.empty) {
-            statusElement.textContent =
-              "እስካሁን የክፍያ ጥያቄ አልላኩም።";
-          } else {
-            const requests = snapshot.docs.map((item) => item.data());
-
-            requests.sort((a, b) =>
-              b.createdAt.toMillis() - a.createdAt.toMillis()
-            );
-
-            const latestRequest = requests[0];
-
-            if (latestRequest.status === "pending") {
-              statusElement.textContent =
-                "የክፍያ ጥያቄዎ በመጠባበቅ ላይ ነው።";
-            } else if (latestRequest.status === "approved") {
-              statusElement.textContent =
-                "የክፍያ ጥያቄዎ ጸድቋል። Premium አባልነትዎ ተነቅቷል።";
-            } else {
-              statusElement.textContent =
-                "የክፍያ ጥያቄዎ ሁኔታ፦ " + latestRequest.status;
-            }
-          }
-        } catch (error) {
-          console.error(error);
+    unsubscribePaymentStatus = onSnapshot(
+      myRequestsQuery,
+      (snapshot) => {
+        if (snapshot.empty) {
           statusElement.textContent =
-            "የክፍያ ሁኔታን ማምጣት አልተቻለም።";
+            "እስካሁን የክፍያ ጥያቄ አልላኩም።";
+          return;
         }
+
+        const requests = snapshot.docs.map((item) => item.data());
+
+        requests.sort((a, b) =>
+          b.createdAt.toMillis() - a.createdAt.toMillis()
+        );
+
+        const latestRequest = requests[0];
+
+        if (latestRequest.status === "pending") {
+          statusElement.textContent =
+            "የክፍያ ጥያቄዎ በመጠባበቅ ላይ ነው።";
+        } else if (latestRequest.status === "approved") {
+          statusElement.textContent =
+            "የክፍያ ጥያቄዎ ጸድቋል። Premium አባልነትዎ ተነቅቷል።";
+        } else {
+          statusElement.textContent =
+            "የክፍያ ጥያቄዎ ሁኔታ፦ " + latestRequest.status;
+        }
+      },
+      (error) => {
+        console.error(error);
+        statusElement.textContent =
+          "የክፍያ ሁኔታን ማምጣት አልተቻለም።";
       }
-    }
+    );
+  }
+}
     showMessage("በመለያዎ ገብተዋል።");
 
     if (isAdminUser) {
