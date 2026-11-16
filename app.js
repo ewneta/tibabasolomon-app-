@@ -136,7 +136,7 @@ onAuthStateChanged(auth, async (user) => {
     user.uid === "YplGuZ4wQxO1otM0wuJjf8gBy9a2";
   console.log("Current UID:", user?.uid);
 console.log("Is Admin:", isAdminUser);
-
+alert("Is Admin: " + isAdminUser);
   if (adminPanel) {
     adminPanel.hidden = !isAdminUser;
   }
