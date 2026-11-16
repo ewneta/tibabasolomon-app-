@@ -191,40 +191,44 @@ onAuthStateChanged(auth, async (user) => {
     showMessage("በመለያዎ ገብተዋል።");
 
     if (isAdminUser) {
-      premiumStatusMessage.textContent =
-        "አስተዳዳሪ ነዎት። ሁሉንም ትምህርቶች ማየት ይችላሉ።";
-    } else {
-      try {
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
+  premiumStatusMessage.textContent =
+    "አስተዳዳሪ ነዎት። ሁሉንም ትምህርቶች ማየት ይችላሉ.";
+} else {
+  const userRef = doc(db, "users", user.uid);
 
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          const expiry = userData.premiumUntil
-            ? userData.premiumUntil.toDate()
-            : null;
+  unsubscribePremiumStatus = onSnapshot(
+    userRef,
+    (userSnap) => {
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
 
-          if (expiry && expiry > new Date()) {
-            const dateText = expiry.toLocaleDateString(
-              lang === "am" ? "am-ET" : "en-US"
-            );
+        const expiry = userData.premiumUntil
+          ? userData.premiumUntil.toDate()
+          : null;
 
-            premiumStatusMessage.textContent =
-              "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
-          } else {
-            premiumStatusMessage.textContent =
-              "አሁን Premium አባል አይደሉም።";
-          }
+        if (expiry && expiry > new Date()) {
+          const dateText = expiry.toLocaleDateString(
+            lang === "am" ? "am-ET" : "en-US"
+          );
+
+          premiumStatusMessage.textContent =
+            "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
         } else {
           premiumStatusMessage.textContent =
             "አሁን Premium አባል አይደሉም።";
         }
-      } catch (error) {
-        console.error(error);
+      } else {
         premiumStatusMessage.textContent =
-          "የአባልነት ሁኔታን ማምጣት አልተቻለም።";
+          "አሁን Premium አባል አይደሉም።";
       }
+    },
+    (error) => {
+      console.error(error);
+      premiumStatusMessage.textContent =
+        "የአባልነት ሁኔታን ማምጣት አልተቻለም።";
     }
+  );
+}
   }
 });
 
