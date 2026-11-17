@@ -614,7 +614,7 @@ const lessonsQuery = hasPremium
 
       const card = document.createElement("article");
       card.className = "lesson-card";
-
+card.dataset.category = lesson.category || "other";
       const title = document.createElement("h3");
       title.textContent = lang === "am"
         ? lesson.titleAm
@@ -700,16 +700,36 @@ card.appendChild(editBtn);
       
     });
     const searchInput = document.getElementById("lessonSearch");
+const categoryFilter = document.getElementById("categoryFilter");
+
+function filterLessons() {
+  const searchText = searchInput
+    ? searchInput.value.trim().toLowerCase()
+    : "";
+
+  const selectedCategory = categoryFilter
+    ? categoryFilter.value
+    : "all";
+
+  document.querySelectorAll(".lesson-card").forEach((card) => {
+    const text = card.textContent.toLowerCase();
+    const matchesSearch = text.includes(searchText);
+
+    const matchesCategory =
+      selectedCategory === "all" ||
+      card.dataset.category === selectedCategory;
+
+    card.style.display =
+      matchesSearch && matchesCategory ? "" : "none";
+  });
+}
 
 if (searchInput) {
-  searchInput.oninput = () => {
-    const searchText = searchInput.value.trim().toLowerCase();
+  searchInput.oninput = filterLessons;
+}
 
-    document.querySelectorAll(".lesson-card").forEach((card) => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(searchText) ? "" : "none";
-    });
-  };
+if (categoryFilter) {
+  categoryFilter.onchange = filterLessons;
 }
 
   } catch (error) {
