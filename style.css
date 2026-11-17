@@ -339,3 +339,29 @@ footer a {
     flex-direction: column;
   }
 }
+
+.category-badge {
+  display: inline-block;
+  width: fit-content;
+  background: #e9f2ec;
+  color: #173b32;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 12px;
+  border: 1px solid #cbded0;
+}
+
+.premium-badge {
+  display: inline-block;
+  width: fit-content;
+  background: #fff4d6;
+  color: #946500;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 10px;
+  border: 1px solid #e8c66c;
+}
