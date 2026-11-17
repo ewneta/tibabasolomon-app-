@@ -604,19 +604,8 @@ const lessonsQuery = hasPremium
   ? lessonsRef
   : query(lessonsRef, where("isPremium", "==", false));
 
-const searchInput = document.getElementById("lessonSearch");
 
-if (searchInput) {
-  searchInput.oninput = () => {
-    const searchText = searchInput.value.trim().toLowerCase();
-
-    document.querySelectorAll(".lesson-card").forEach((card) => {
-      const text = card.textContent.toLowerCase();
-
-      card.style.display = text.includes(searchText) ? "" : "none";
-    });
-  };
-}
+    const snapshot = await getDocs(lessonsQuery);
     lessonList.innerHTML = "";
 
     snapshot.forEach((lessonDoc) => {
@@ -693,8 +682,20 @@ editBtn.onclick = async () => {
 card.appendChild(editBtn);
 }
       lessonList.appendChild(card);
-      const snapshot = await getDocs(lessonsQuery);
+      
     });
+    const searchInput = document.getElementById("lessonSearch");
+
+if (searchInput) {
+  searchInput.oninput = () => {
+    const searchText = searchInput.value.trim().toLowerCase();
+
+    document.querySelectorAll(".lesson-card").forEach((card) => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(searchText) ? "" : "none";
+    });
+  };
+}
 
   } catch (error) {
     console.error(error);
