@@ -215,17 +215,25 @@ console.log("Is Admin:", isAdminUser);
           : null;
 
         if (expiry && expiry > new Date()) {
-          const dateText = expiry.toLocaleDateString(
-            lang === "am" ? "am-ET" : "en-US"
-          );
+  const dateText = expiry.toLocaleDateString(
+    lang === "am" ? "am-ET" : "en-US"
+  );
 
-          premiumStatusMessage.textContent =
-            "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
-        } else {
-          premiumStatusMessage.textContent =
-            "አሁን Premium አባል አይደሉም።";
-        }
-      } else {
+  const remainingTime = expiry.getTime() - Date.now();
+  const remainingDays = Math.ceil(
+    remainingTime / (1000 * 60 * 60 * 24)
+  );
+
+  if (remainingDays <= 3) {
+    premiumStatusMessage.textContent =
+      "⚠️ ማስጠንቀቂያ! Premium አባልነትዎ በ" +
+      remainingDays + " ቀን ውስጥ ያበቃል። የማለቂያ ቀን፦ " +
+      dateText;
+  } else {
+    premiumStatusMessage.textContent =
+      "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
+  }
+} else {
         premiumStatusMessage.textContent =
           "አሁን Premium አባል አይደሉም።";
       }
