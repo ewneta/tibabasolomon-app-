@@ -1,4 +1,4 @@
-const CACHE = 'tibabasolomon-v5';
+const CACHE = 'tibabasolomon-v6';
 
 const ASSETS = [
   './',
