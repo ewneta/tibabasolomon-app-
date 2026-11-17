@@ -424,3 +424,23 @@ footer a {
 #learn .card p {
   line-height: 1.8;
 }
+
+#learn .premium-card {
+  background: linear-gradient(145deg, #fffaf0, #f5e8c9);
+  border: 1px solid #dfc27e;
+  box-shadow: 0 8px 24px rgba(148, 101, 0, 0.10);
+}
+
+#learn .premium-card h3 {
+  color: #805900;
+}
+
+#learn .premium-card .premium {
+  display: inline-block;
+  background: #8b671c;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-weight: 800;
+  margin-top: 12px;
+}
