@@ -486,3 +486,23 @@ footer a {
   line-height: 1.8;
   color: #52645a;
 }
+.lesson-card .category-badge {
+  display: inline-block;
+  background: #e8f2eb;
+  color: var(--green);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.lesson-card .premium-badge {
+  display: inline-block;
+  background: #fff0c9;
+  color: #805900;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 10px 0 0 8px;
+}
