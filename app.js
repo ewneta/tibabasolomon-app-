@@ -627,20 +627,30 @@ card.dataset.category = lesson.category || "other";
 
       card.appendChild(title);
       card.appendChild(description);
-      const categoryLabel = document.createElement("p");
+      
+const categoryLabel = document.createElement("span");
+categoryLabel.className = "category-badge";
 
 const categoryNames = {
-  plants: lang === "am" ? "ዕፅዋት" : "Plants",
-  traditional: lang === "am" ? "ባሕላዊ ዕውቀት" : "Traditional Knowledge",
-  preparation: lang === "am" ? "የዝግጅት ዘዴ" : "Preparation Methods",
-  other: lang === "am" ? "ሌሎች" : "Other"
+  plants: lang === "am" ? "🌿 ዕፅዋት" : "🌿 Plants",
+  traditional: lang === "am" ? "📜 ባሕላዊ ዕውቀት" : "📜 Traditional Knowledge",
+  preparation: lang === "am" ? "🧪 የዝግጅት ዘዴ" : "🧪 Preparation Methods",
+  other: lang === "am" ? "📚 ሌሎች" : "📚 Other"
 };
 
 categoryLabel.textContent =
   categoryNames[lesson.category] ||
-  (lang === "am" ? "ሌሎች" : "Other");
+  (lang === "am" ? "📚 ሌሎች" : "📚 Other");
 
 card.appendChild(categoryLabel);
+
+if (lesson.isPremium) {
+  const premiumBadge = document.createElement("span");
+  premiumBadge.className = "premium-badge";
+  premiumBadge.textContent = "👑 Premium";
+  card.appendChild(premiumBadge);
+}
+
 if (isAdmin) {
      const deleteBtn = document.createElement("button");
 deleteBtn.textContent = "Delete";
