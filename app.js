@@ -296,6 +296,7 @@ if (lessonForm) {
         titleEn: document.getElementById("lessonTitleEn").value.trim(),
         descriptionAm: document.getElementById("lessonDescriptionAm").value.trim(),
         descriptionEn: document.getElementById("lessonDescriptionEn").value.trim(),
+        category: document.getElementById("lessonCategory").value,
         isPremium: document.getElementById("lessonPremium").checked
       });
 
@@ -626,6 +627,20 @@ const lessonsQuery = hasPremium
 
       card.appendChild(title);
       card.appendChild(description);
+      const categoryLabel = document.createElement("p");
+
+const categoryNames = {
+  plants: lang === "am" ? "ዕፅዋት" : "Plants",
+  traditional: lang === "am" ? "ባሕላዊ ዕውቀት" : "Traditional Knowledge",
+  preparation: lang === "am" ? "የዝግጅት ዘዴ" : "Preparation Methods",
+  other: lang === "am" ? "ሌሎች" : "Other"
+};
+
+categoryLabel.textContent =
+  categoryNames[lesson.category] ||
+  (lang === "am" ? "ሌሎች" : "Other");
+
+card.appendChild(categoryLabel);
 if (isAdmin) {
      const deleteBtn = document.createElement("button");
 deleteBtn.textContent = "Delete";
