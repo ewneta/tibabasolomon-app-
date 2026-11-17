@@ -444,3 +444,45 @@ footer a {
   font-weight: 800;
   margin-top: 12px;
 }
+.category-filter {
+  width: 100%;
+  max-width: 350px;
+  margin: 20px 0;
+}
+
+#categoryFilter {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #cbded0;
+  border-radius: 12px;
+  background: white;
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+#categoryFilter:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(23, 59, 50, 0.12);
+}
+.lesson-card {
+  background: white;
+  border: 1px solid #dce8df;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px rgba(23, 59, 50, 0.07);
+}
+
+.lesson-card h3 {
+  color: var(--green);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.lesson-card p {
+  line-height: 1.8;
+  color: #52645a;
+}
