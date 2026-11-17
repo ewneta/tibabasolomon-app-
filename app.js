@@ -474,6 +474,9 @@ if (data.status !== "pending") {
 rejectBtn.textContent = "Reject Request";
 console.log("REJECT BUTTON CREATED");
 rejectBtn.addEventListener("click", async () => {
+    if (data.status !== "pending") {
+    return;
+  }
   if (!confirm("ይህን የክፍያ ጥያቄ ውድቅ ማድረግ ይፈልጋሉ?")) {
     return;
   }
