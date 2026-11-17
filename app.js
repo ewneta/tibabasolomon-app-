@@ -205,45 +205,55 @@ console.log("Is Admin:", isAdminUser);
   const userRef = doc(db, "users", user.uid);
 
   unsubscribePremiumStatus = onSnapshot(
-    userRef,
-    (userSnap) => {
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
+  userRef,
+  (userSnap) => {
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
 
-        const expiry = userData.premiumUntil
-          ? userData.premiumUntil.toDate()
-          : null;
+      const expiry = userData.premiumUntil
+        ? userData.premiumUntil.toDate()
+        : null;
 
-        if (expiry && expiry > new Date()) {
-  const dateText = expiry.toLocaleDateString(
-    lang === "am" ? "am-ET" : "en-US"
-  );
+      if (expiry && expiry > new Date()) {
+        const dateText = expiry.toLocaleDateString(
+          lang === "am" ? "am-ET" : "en-US"
+        );
 
-  const remainingTime = expiry.getTime() - Date.now();
-  const remainingDays = Math.ceil(
-    remainingTime / (1000 * 60 * 60 * 24)
-  );
+        const remainingTime = expiry.getTime() - Date.now();
+        const remainingDays = Math.ceil(
+          remainingTime / (1000 * 60 * 60 * 24)
+        );
 
-  if (remainingDays <= 3) {
-    premiumStatusMessage.textContent =
-      "⚠️ ማስጠንቀቂያ! Premium አባልነትዎ በ" +
-      remainingDays + " ቀን ውስጥ ያበቃል። የማለቂያ ቀን፦ " +
-      dateText;
-  } else {
-    premiumStatusMessage.textContent =
-      "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText;
-  }
-} else {
+        if (remainingDays <= 3) {
+          premiumStatusMessage.textContent =
+            lang === "am"
+              ? `⚠️ ማስጠንቀቂያ! Premium አባልነትዎ በ${remainingDays} ቀን ውስጥ ያበቃል።`
+              : `⚠️ Warning! Your Premium membership expires in ${remainingDays} days.`;
+        } else {
+          premiumStatusMessage.textContent =
+            lang === "am"
+              ? "Premium አባልነትዎ ንቁ ነው። የሚያበቃበት ቀን፦ " + dateText
+              : "Your Premium membership is active. Expiry date: " + dateText;
+        }
+      } else {
         premiumStatusMessage.textContent =
-          "አሁን Premium አባል አይደሉም።";
+          lang === "am"
+            ? "አሁን Premium አባል አይደሉም።"
+            : "You are not currently a Premium member.";
       }
-    },
-    (error) => {
-      console.error(error);
+    } else {
       premiumStatusMessage.textContent =
-        "የአባልነት ሁኔታን ማምጣት አልተቻለም።";
+        lang === "am"
+          ? "አሁን Premium አባል አይደሉም።"
+          : "You are not currently a Premium member.";
     }
-  );
+  },
+  (error) => {
+    console.error(error);
+    premiumStatusMessage.textContent =
+      "የአባልነት ሁኔታን ማምጣት አልተቻለም።";
+  }
+);
 }
   }
 });
