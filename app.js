@@ -624,12 +624,38 @@ card.dataset.category = lesson.category || "other";
         : lesson.titleEn;
 
       const description = document.createElement("p");
-      description.textContent = lang === "am"
-        ? lesson.descriptionAm
-        : lesson.descriptionEn;
+description.textContent = lang === "am"
+  ? lesson.descriptionAm
+  : lesson.descriptionEn;
 
-      card.appendChild(title);
-      card.appendChild(description);
+const content = document.createElement("div");
+content.className = "lesson-content";
+content.style.display = "none";
+content.style.whiteSpace = "pre-wrap";
+
+content.textContent = lang === "am"
+  ? (lesson.contentAm || "ሙሉ ይዘት አልተጨመረም።")
+  : (lesson.contentEn || "Full content is not available.");
+
+const readMoreBtn = document.createElement("button");
+readMoreBtn.textContent = lang === "am"
+  ? "ሙሉ ትምህርቱን አንብብ"
+  : "Read More";
+
+readMoreBtn.addEventListener("click", () => {
+  const isHidden = content.style.display === "none";
+
+  content.style.display = isHidden ? "block" : "none";
+
+  readMoreBtn.textContent = isHidden
+    ? (lang === "am" ? "ዝጋ" : "Close")
+    : (lang === "am" ? "ሙሉ ትምህርቱን አንብብ" : "Read More");
+});
+
+card.appendChild(title);
+card.appendChild(description);
+card.appendChild(readMoreBtn);
+card.appendChild(content);
       
 const categoryLabel = document.createElement("span");
 categoryLabel.className = "category-badge";
