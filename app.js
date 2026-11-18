@@ -292,14 +292,17 @@ if (lessonForm) {
 
     try {
       await addDoc(collection(db, "lessons"), {
-        titleAm: document.getElementById("lessonTitleAm").value.trim(),
-        titleEn: document.getElementById("lessonTitleEn").value.trim(),
-        descriptionAm: document.getElementById("lessonDescriptionAm").value.trim(),
-        descriptionEn: document.getElementById("lessonDescriptionEn").value.trim(),
-        category: document.getElementById("lessonCategory").value,
-        isPremium: document.getElementById("lessonPremium").checked
-      });
+  titleAm: document.getElementById("lessonTitleAm").value.trim(),
+  titleEn: document.getElementById("lessonTitleEn").value.trim(),
+  descriptionAm: document.getElementById("lessonDescriptionAm").value.trim(),
+  descriptionEn: document.getElementById("lessonDescriptionEn").value.trim(),
 
+  contentAm: document.getElementById("lessonContentAm").value.trim(),
+  contentEn: document.getElementById("lessonContentEn").value.trim(),
+
+  category: document.getElementById("lessonCategory").value,
+  isPremium: document.getElementById("lessonPremium").checked
+});
       adminMessage.textContent = "ትምህርቱ በተሳካ ሁኔታ ተጨምሯል!";
       lessonForm.reset();
 
