@@ -506,3 +506,28 @@ footer a {
   font-weight: 700;
   margin: 10px 0 0 8px;
 }
+.lesson-content {
+  margin-top: 16px;
+  padding: 18px;
+  background: #f4f8f5;
+  border-left: 4px solid var(--green);
+  border-radius: 12px;
+  color: #354b40;
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+.lesson-card button {
+  margin-top: 14px;
+  padding: 10px 18px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lesson-card button:hover {
+  opacity: 0.88;
+}
