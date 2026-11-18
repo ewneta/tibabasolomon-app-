@@ -568,3 +568,22 @@ footer a {
   white-space: pre-wrap;
   color: #354b40;
 }
+.reader-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  max-width: 850px;
+  margin: 0 auto 15px;
+}
+
+.reader-controls button {
+  min-width: 48px;
+  padding: 10px 15px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
