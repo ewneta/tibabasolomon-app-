@@ -656,6 +656,7 @@ console.log("Lesson content:", content.textContent);
   readerText.textContent = content.textContent;
 
   readerContent.innerHTML = "";
+  readerContent.textContent = "READER TEST - ይህ ሙከራ ነው።";
   readerContent.appendChild(readerTitle);
   readerContent.appendChild(readerText);
 
