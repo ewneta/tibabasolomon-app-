@@ -655,11 +655,9 @@ console.log("Lesson content:", content.textContent);
   const readerText = document.createElement("div");
   readerText.textContent = content.textContent;
 
-  readerContent.innerHTML = "";
+ readerContent.innerHTML = "<h2>READER TEST</h2><p>የሙከራ ጽሑፍ ነው።</p>";
   readerContent.textContent = "READER TEST - ይህ ሙከራ ነው።";
-  readerContent.appendChild(readerTitle);
-  readerContent.appendChild(readerText);
-
+  
   reader.classList.add("active");
   document.body.style.overflow = "hidden";
 });
