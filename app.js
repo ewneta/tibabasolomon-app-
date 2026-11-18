@@ -644,6 +644,18 @@ readMoreBtn.textContent = lang === "am"
 
 readMoreBtn.addEventListener("click", () => {
   const reader = document.getElementById("lessonReader");
+  const readerContent = document.getElementById("lessonReaderContent");
+
+  readerContent.innerHTML = "";
+
+  const readerTitle = document.createElement("h2");
+  readerTitle.textContent = title.textContent;
+
+  const readerText = document.createElement("div");
+  readerText.textContent = content.textContent;
+
+  readerContent.appendChild(readerTitle);
+  readerContent.appendChild(readerText);
 
   reader.classList.add("active");
   document.body.style.overflow = "hidden";
