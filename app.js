@@ -644,24 +644,10 @@ readMoreBtn.textContent = lang === "am"
 
 readMoreBtn.addEventListener("click", () => {
   const reader = document.getElementById("lessonReader");
-  const readerContent = document.getElementById("lessonReaderContent");
-console.log("Reader:", reader);
-console.log("Reader content:", readerContent);
-console.log("Lesson title:", title.textContent);
-console.log("Lesson content:", content.textContent);
-  const readerTitle = document.createElement("h2");
-  readerTitle.textContent = title.textContent;
 
-  const readerText = document.createElement("div");
-  readerText.textContent = content.textContent;
-
- readerContent.innerHTML = "<h2>READER TEST</h2><p>የሙከራ ጽሑፍ ነው።</p>";
-  readerContent.textContent = "READER TEST - ይህ ሙከራ ነው።";
-  
   reader.classList.add("active");
   document.body.style.overflow = "hidden";
 });
-
 card.appendChild(title);
 card.appendChild(description);
 card.appendChild(readMoreBtn);
