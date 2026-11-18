@@ -201,6 +201,13 @@ console.log("Is Admin:", isAdminUser);
     if (isAdminUser) {
   premiumStatusMessage.textContent =
     "አስተዳዳሪ ነዎት። ሁሉንም ትምህርቶች ማየት ይችላሉ.";
+
+  const purchaseSection =
+    document.getElementById("premiumPurchaseSection");
+
+  if (purchaseSection) {
+    purchaseSection.style.display = "none";
+  }
 } else {
   const userRef = doc(db, "users", user.uid);
 
