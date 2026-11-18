@@ -272,6 +272,7 @@ if (langBtn) {
     });
 
     langBtn.textContent = lang === "am" ? "English" : "አማርኛ";
+    loadLessons();
 });
 }
 
