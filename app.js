@@ -643,13 +643,21 @@ readMoreBtn.textContent = lang === "am"
   : "Read More";
 
 readMoreBtn.addEventListener("click", () => {
-  const isHidden = content.style.display === "none";
+  const reader = document.getElementById("lessonReader");
+  const readerContent = document.getElementById("lessonReaderContent");
 
-  content.style.display = isHidden ? "block" : "none";
+  const readerTitle = document.createElement("h2");
+  readerTitle.textContent = title.textContent;
 
-  readMoreBtn.textContent = isHidden
-    ? (lang === "am" ? "ዝጋ" : "Close")
-    : (lang === "am" ? "ሙሉ ትምህርቱን አንብብ" : "Read More");
+  const readerText = document.createElement("div");
+  readerText.textContent = content.textContent;
+
+  readerContent.innerHTML = "";
+  readerContent.appendChild(readerTitle);
+  readerContent.appendChild(readerText);
+
+  reader.classList.add("active");
+  document.body.style.overflow = "hidden";
 });
 
 card.appendChild(title);
