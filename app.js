@@ -648,7 +648,6 @@ readMoreBtn.addEventListener("click", () => {
   const readerContent = document.getElementById("lessonReaderContent");
 
   readerContent.innerHTML = "";
-readerContent.textContent = "የማንበቢያ ሙከራ ተሳክቷል።";
   const readerTitle = document.createElement("h2");
   readerTitle.textContent = title.textContent;
 
