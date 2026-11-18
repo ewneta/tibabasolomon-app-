@@ -784,4 +784,12 @@ if (categoryFilter) {
     lessonList.textContent = "ትምህርቶችን ማምጣት አልተቻለም።";
   }
 }
+const closeLessonReader =
+  document.getElementById("closeLessonReader");
 
+if (closeLessonReader) {
+  closeLessonReader.addEventListener("click", () => {
+    document.getElementById("lessonReader").classList.remove("active");
+    document.body.style.overflow = "";
+  });
+}
