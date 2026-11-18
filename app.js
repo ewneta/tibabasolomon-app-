@@ -793,3 +793,27 @@ if (closeLessonReader) {
     document.body.style.overflow = "";
   });
 }
+let readerFontSize = 17;
+
+const increaseFontBtn = document.getElementById("increaseFont");
+const decreaseFontBtn = document.getElementById("decreaseFont");
+
+if (increaseFontBtn) {
+  increaseFontBtn.addEventListener("click", () => {
+    if (readerFontSize < 30) {
+      readerFontSize += 2;
+      document.getElementById("lessonReaderContent").style.fontSize =
+        readerFontSize + "px";
+    }
+  });
+}
+
+if (decreaseFontBtn) {
+  decreaseFontBtn.addEventListener("click", () => {
+    if (readerFontSize > 13) {
+      readerFontSize -= 2;
+      document.getElementById("lessonReaderContent").style.fontSize =
+        readerFontSize + "px";
+    }
+  });
+}
